@@ -3,17 +3,16 @@ import QtQuick.Window
 
 Window {
     id: window
-    width: 800
-    height: 500
+    width: 1000
+    height: 700
     visible: true
-    visibility: Window.FullScreen
     title: "OSK on Focus Bug Reproducer (Windows Tablet Mode)"
 
     property string tapStatus: ""
 
     Timer {
         id: tapTimer
-        interval: 1000
+        interval: 700
         onTriggered: window.tapStatus = ""
     }
 
