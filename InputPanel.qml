@@ -170,6 +170,74 @@ FocusScope {
                 }
             }
 
+            // Close button - focusPolicy + TapHandler + Accessible.pressed variant (mode 5)
+            Rectangle {
+                id: closeButton5
+                width: 80
+                height: 32
+                anchors.right: parent.right
+                anchors.verticalCenter: parent.verticalCenter
+                visible: root.closeMode === 5
+                color: hoverHandler5.hovered ? "#ccc" : "#ddd"
+                border.color: "#999"
+                border.width: 1
+                radius: 4
+                focusPolicy: Qt.StrongFocus
+
+                Accessible.role: Accessible.Button
+                Accessible.name: "Close"
+                Accessible.pressed: tapHandler5.pressed
+
+                Text {
+                    anchors.centerIn: parent
+                    text: "Close"
+                    font.pixelSize: 14
+                }
+
+                HoverHandler {
+                    id: hoverHandler5
+                    cursorShape: Qt.PointingHandCursor
+                }
+
+                TapHandler {
+                    id: tapHandler5
+                    onTapped: root.closeTriggered()
+                }
+            }
+
+            // Close button - Control + TapHandler + Accessible.pressed variant (mode 6)
+            Control {
+                id: closeButton6
+                width: 80
+                height: 32
+                anchors.right: parent.right
+                anchors.verticalCenter: parent.verticalCenter
+                visible: root.closeMode === 6
+
+                Accessible.role: Accessible.Button
+                Accessible.name: "Close"
+                Accessible.pressed: tapHandler6.pressed
+
+                background: Rectangle {
+                    color: parent.hovered ? "#ccc" : "#ddd"
+                    border.color: "#999"
+                    border.width: 1
+                    radius: 4
+                }
+
+                contentItem: Text {
+                    text: "Close"
+                    font.pixelSize: 14
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+
+                TapHandler {
+                    id: tapHandler6
+                    onTapped: root.closeTriggered()
+                }
+            }
+
         }
 
         // 1. Plain TextInput

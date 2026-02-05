@@ -19,6 +19,8 @@ Window {
         ListElement { name: "focusPolicy + TapHandler"; description: "Item with focusPolicy: Qt.StrongFocus (Qt 6.7+)" }
         ListElement { name: "focusPolicy + MouseArea"; description: "focusPolicy with MouseArea.onPressed forceActiveFocus" }
         ListElement { name: "Control + TapHandler"; description: "Control base type with TapHandler" }
+        ListElement { name: "focusPolicy + Accessible"; description: "Rectangle + focusPolicy + TapHandler + Accessible.pressed" }
+        ListElement { name: "Control + Accessible"; description: "Control + TapHandler + Accessible.pressed" }
     }
 
     Timer {
