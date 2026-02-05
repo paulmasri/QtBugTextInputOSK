@@ -4,9 +4,11 @@ import QtQuick.Controls
 FocusScope {
     id: root
 
+    property int closeMode: 0  // 0=MouseArea, 1=Button, 2=MouseArea+focus
+
     signal closeTriggered()
 
-    // Keys.onPressed that swallows all events (like BbSignInLayer)
+    // Keys.onPressed that swallows all events
     Keys.onPressed: (event) => {
         switch (event.key) {
         case Qt.Key_Escape:
@@ -36,7 +38,7 @@ FocusScope {
 
         Item {
             width: parent.width
-            height: closeButton.height
+            height: 40
 
             Text {
                 text: "Text Input Tests"
@@ -46,12 +48,70 @@ FocusScope {
                 anchors.verticalCenter: parent.verticalCenter
             }
 
-            Button {
-                id: closeButton
-                text: "Close"
+            // Close button - MouseArea variant (mode 0)
+            Rectangle {
+                width: 80
+                height: 32
                 anchors.right: parent.right
                 anchors.verticalCenter: parent.verticalCenter
+                visible: root.closeMode === 0
+                color: closeMouseArea0.containsMouse ? "#ccc" : "#ddd"
+                border.color: "#999"
+                border.width: 1
+                radius: 4
+
+                Text {
+                    anchors.centerIn: parent
+                    text: "Close"
+                    font.pixelSize: 14
+                }
+
+                MouseArea {
+                    id: closeMouseArea0
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: root.closeTriggered()
+                }
+            }
+
+            // Close button - Button variant (mode 1)
+            Button {
+                anchors.right: parent.right
+                anchors.verticalCenter: parent.verticalCenter
+                visible: root.closeMode === 1
+                text: "Close"
                 onClicked: root.closeTriggered()
+            }
+
+            // Close button - MouseArea + focus variant (mode 2)
+            Rectangle {
+                width: 80
+                height: 32
+                anchors.right: parent.right
+                anchors.verticalCenter: parent.verticalCenter
+                visible: root.closeMode === 2
+                color: closeMouseArea2.containsMouse ? "#ccc" : "#ddd"
+                border.color: "#999"
+                border.width: 1
+                radius: 4
+
+                Text {
+                    anchors.centerIn: parent
+                    text: "Close"
+                    font.pixelSize: 14
+                }
+
+                MouseArea {
+                    id: closeMouseArea2
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: {
+                        focusDummy.forceActiveFocus()
+                        root.closeTriggered()
+                    }
+                }
             }
         }
 
@@ -100,7 +160,7 @@ FocusScope {
         }
     }
 
-    // focusDummy (like BbSignInLayer)
+    // focusDummy
     Item {
         id: focusDummy
         focus: true
