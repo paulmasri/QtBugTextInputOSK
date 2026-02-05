@@ -238,6 +238,40 @@ FocusScope {
                 }
             }
 
+            // Close button - Control + focusPolicy + TapHandler + Accessible.pressed variant (mode 7)
+            Control {
+                id: closeButton7
+                width: 80
+                height: 32
+                anchors.right: parent.right
+                anchors.verticalCenter: parent.verticalCenter
+                visible: root.closeMode === 7
+                focusPolicy: Qt.StrongFocus
+
+                Accessible.role: Accessible.Button
+                Accessible.name: "Close"
+                Accessible.pressed: tapHandler7.pressed
+
+                background: Rectangle {
+                    color: parent.hovered ? "#ccc" : "#ddd"
+                    border.color: "#999"
+                    border.width: 1
+                    radius: 4
+                }
+
+                contentItem: Text {
+                    text: "Close"
+                    font.pixelSize: 14
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+
+                TapHandler {
+                    id: tapHandler7
+                    onTapped: root.closeTriggered()
+                }
+            }
+
         }
 
         // 1. Plain TextInput

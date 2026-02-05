@@ -21,6 +21,7 @@ Window {
         ListElement { name: "Control + TapHandler"; description: "Control base type with TapHandler" }
         ListElement { name: "focusPolicy + Accessible"; description: "Rectangle + focusPolicy + TapHandler + Accessible.pressed" }
         ListElement { name: "Control + Accessible"; description: "Control + TapHandler + Accessible.pressed" }
+        ListElement { name: "Control + focusPolicy + Accessible"; description: "Control + focusPolicy + TapHandler + Accessible.pressed" }
     }
 
     Timer {
