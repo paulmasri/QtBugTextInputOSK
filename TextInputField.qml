@@ -16,6 +16,7 @@ FocusScope {
         border.color: inputField.activeFocus ? "#2196F3" : "#ccc"
         border.width: 2
         radius: 4
+        clip: true
 
         TextInput {
             id: inputField

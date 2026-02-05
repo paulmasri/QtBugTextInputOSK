@@ -1,5 +1,4 @@
 import QtQuick
-import QtQuick.Controls
 
 FocusScope {
     id: root
@@ -36,7 +35,7 @@ FocusScope {
 
         Item {
             width: parent.width
-            height: closeButton.height
+            height: 40
 
             Text {
                 text: "Text Input Tests"
@@ -46,12 +45,30 @@ FocusScope {
                 anchors.verticalCenter: parent.verticalCenter
             }
 
-            Button {
+            // Close button using MouseArea
+            Rectangle {
                 id: closeButton
-                text: "Close"
+                width: 80
+                height: 32
                 anchors.right: parent.right
                 anchors.verticalCenter: parent.verticalCenter
-                onClicked: root.closeTriggered()
+                color: closeMouseArea.containsMouse ? "#ccc" : "#ddd"
+                border.color: "#999"
+                radius: 4
+
+                Text {
+                    anchors.centerIn: parent
+                    text: "Close"
+                    font.pixelSize: 14
+                }
+
+                MouseArea {
+                    id: closeMouseArea
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: root.closeTriggered()
+                }
             }
         }
 

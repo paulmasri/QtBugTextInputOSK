@@ -1,12 +1,12 @@
 import QtQuick
 import QtQuick.Window
-import QtQuick.Controls
 
 Window {
     id: window
     width: 800
     height: 500
     visible: true
+    visibility: Window.FullScreen
     title: "OSK on Focus Bug Reproducer (Windows Tablet Mode)"
 
     property string tapStatus: ""
@@ -58,11 +58,29 @@ Window {
                 horizontalAlignment: Text.AlignHCenter
             }
 
-            Button {
-                text: "Show Input Panel"
+            // Show button using MouseArea
+            Rectangle {
+                width: 160
+                height: 40
                 anchors.horizontalCenter: parent.horizontalCenter
                 visible: !modalLayer.visible
-                onClicked: modalLayer.showLayer()
+                color: showMouseArea.containsMouse ? "#ccc" : "#ddd"
+                border.color: "#999"
+                radius: 4
+
+                Text {
+                    anchors.centerIn: parent
+                    text: "Show Input Panel"
+                    font.pixelSize: 14
+                }
+
+                MouseArea {
+                    id: showMouseArea
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: modalLayer.showLayer()
+                }
             }
         }
     }
