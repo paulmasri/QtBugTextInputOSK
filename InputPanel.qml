@@ -108,27 +108,54 @@ FocusScope {
             placeholderText: "3. TextField (QuickControls)"
         }
 
-        // Clear focus button
-        Rectangle {
-            width: 120
-            height: 32
-            color: clearFocusMouseArea.containsMouse ? "#ccc" : "#ddd"
-            border.color: "#999"
-            border.width: 1
-            radius: 4
+        // Test buttons
+        Row {
+            spacing: 10
 
-            Text {
-                anchors.centerIn: parent
-                text: "Clear Focus"
-                font.pixelSize: 14
+            Rectangle {
+                width: 120
+                height: 32
+                color: clearFocusMouseArea.containsMouse ? "#ccc" : "#ddd"
+                border.color: "#999"
+                border.width: 1
+                radius: 4
+
+                Text {
+                    anchors.centerIn: parent
+                    text: "Clear Focus"
+                    font.pixelSize: 14
+                }
+
+                MouseArea {
+                    id: clearFocusMouseArea
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: focusDummy.forceActiveFocus()
+                }
             }
 
-            MouseArea {
-                id: clearFocusMouseArea
-                anchors.fill: parent
-                hoverEnabled: true
-                cursorShape: Qt.PointingHandCursor
-                onClicked: focusDummy.forceActiveFocus()
+            Rectangle {
+                width: 120
+                height: 32
+                color: commitMouseArea.containsMouse ? "#ccc" : "#ddd"
+                border.color: "#999"
+                border.width: 1
+                radius: 4
+
+                Text {
+                    anchors.centerIn: parent
+                    text: "Commit"
+                    font.pixelSize: 14
+                }
+
+                MouseArea {
+                    id: commitMouseArea
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: Qt.inputMethod.commit()
+                }
             }
         }
 
