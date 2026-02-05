@@ -97,13 +97,16 @@ Window {
         }
 
         function showLayer() {
+            modalLoader.sourceComponent = inputPanelComponent
             visible = true
             focus = true
         }
 
         function hideLayer() {
+            Qt.inputMethod.hide()
             focus = false
             visible = false
+            modalLoader.sourceComponent = null  // Unload the panel
         }
 
         // Semi-opaque background overlay
@@ -125,8 +128,6 @@ Window {
             width: 400
             height: 420
             focus: true
-
-            sourceComponent: inputPanelComponent
         }
 
         Component {
