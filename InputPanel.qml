@@ -84,6 +84,35 @@ FocusScope {
                 onClicked: root.closeTriggered()
             }
 
+            // Close button - focusPolicy + TapHandler variant (mode 2)
+            Rectangle {
+                width: 80
+                height: 32
+                anchors.right: parent.right
+                anchors.verticalCenter: parent.verticalCenter
+                visible: root.closeMode === 2
+                color: hoverHandler2.hovered ? "#ccc" : "#ddd"
+                border.color: "#999"
+                border.width: 1
+                radius: 4
+                focusPolicy: Qt.StrongFocus
+
+                Text {
+                    anchors.centerIn: parent
+                    text: "Close"
+                    font.pixelSize: 14
+                }
+
+                HoverHandler {
+                    id: hoverHandler2
+                    cursorShape: Qt.PointingHandCursor
+                }
+
+                TapHandler {
+                    onTapped: root.closeTriggered()
+                }
+            }
+
         }
 
         // 1. Plain TextInput
