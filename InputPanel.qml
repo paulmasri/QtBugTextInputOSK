@@ -5,11 +5,18 @@ FocusScope {
 
     signal closeTriggered()
 
-    // Keys.onPressed that swallows all events (like BbSignInLayer)
+    function close() {
+        // Clear focus from any input before closing
+        focusDummy.forceActiveFocus()
+        Qt.inputMethod.hide()
+        root.closeTriggered()
+    }
+
+    // Keys.onPressed that swallows all events
     Keys.onPressed: (event) => {
         switch (event.key) {
         case Qt.Key_Escape:
-            root.closeTriggered()
+            root.close()
             break
         case Qt.Key_Tab:
             if (focusDummy.activeFocus)
@@ -67,7 +74,7 @@ FocusScope {
                     anchors.fill: parent
                     hoverEnabled: true
                     cursorShape: Qt.PointingHandCursor
-                    onClicked: root.closeTriggered()
+                    onClicked: root.close()
                 }
             }
         }
