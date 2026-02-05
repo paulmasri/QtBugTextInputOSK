@@ -143,6 +143,33 @@ FocusScope {
                 }
             }
 
+            // Close button - Control + TapHandler variant (mode 4)
+            Control {
+                width: 80
+                height: 32
+                anchors.right: parent.right
+                anchors.verticalCenter: parent.verticalCenter
+                visible: root.closeMode === 4
+
+                background: Rectangle {
+                    color: parent.hovered ? "#ccc" : "#ddd"
+                    border.color: "#999"
+                    border.width: 1
+                    radius: 4
+                }
+
+                contentItem: Text {
+                    text: "Close"
+                    font.pixelSize: 14
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+
+                TapHandler {
+                    onTapped: root.closeTriggered()
+                }
+            }
+
         }
 
         // 1. Plain TextInput
