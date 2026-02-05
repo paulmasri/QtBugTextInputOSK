@@ -108,6 +108,28 @@ FocusScope {
             placeholderText: "3. TextField (QuickControls)"
         }
 
+        // 4. ReadOnly TextInput (focus sink)
+        Rectangle {
+            width: parent.width
+            height: 50
+            color: "#eee"
+            border.color: input4.activeFocus ? "#2196F3" : "#ccc"
+            border.width: 2
+            radius: 4
+
+            TextInput {
+                id: input4
+                anchors.fill: parent
+                anchors.leftMargin: 10
+                anchors.rightMargin: 10
+                verticalAlignment: TextInput.AlignVCenter
+                font.pixelSize: 18
+                readOnly: true
+                text: "4. ReadOnly TextInput (focus sink)"
+                color: "#666"
+            }
+        }
+
         // Test buttons
         Row {
             spacing: 10
@@ -178,6 +200,11 @@ FocusScope {
                 font.pixelSize: 12
                 color: "#666"
                 text: "3. TextField — activeFocus: " + input3.activeFocus
+            }
+            Text {
+                font.pixelSize: 12
+                color: "#666"
+                text: "4. ReadOnly — activeFocus: " + input4.activeFocus
             }
         }
     }
