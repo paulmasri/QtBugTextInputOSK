@@ -14,14 +14,18 @@ Window {
 
     ListModel {
         id: closeModes
-        ListElement { name: "MouseArea (has bug)"; description: "Close using MouseArea - OSK becomes sticky" }
-        ListElement { name: "Button (works)"; description: "Close using Button component - OSK behaves correctly" }
-        ListElement { name: "focusPolicy + TapHandler"; description: "Item with focusPolicy: Qt.StrongFocus (Qt 6.7+)" }
-        ListElement { name: "focusPolicy + MouseArea"; description: "focusPolicy with MouseArea.onPressed forceActiveFocus" }
-        ListElement { name: "Control + TapHandler"; description: "Control base type with TapHandler" }
-        ListElement { name: "focusPolicy + Accessible"; description: "Rectangle + focusPolicy + TapHandler + Accessible.pressed" }
-        ListElement { name: "Control + Accessible"; description: "Control + TapHandler + Accessible.pressed" }
-        ListElement { name: "Control + focusPolicy + Accessible"; description: "Control + focusPolicy + TapHandler + Accessible.pressed" }
+        // Demonstrates the bug
+        ListElement { mode: 0; name: "MouseArea (buggy)"; description: "Plain MouseArea with no focus handling" }
+        // Known working solution
+        ListElement { mode: 1; name: "Button (works)"; description: "Button from QtQuick.Controls" }
+        // Failed attempts to fix without QtQuick.Controls
+        ListElement { mode: 2; name: "focusPolicy + TapHandler (buggy)"; description: "Rectangle with focusPolicy: Qt.StrongFocus" }
+        ListElement { mode: 3; name: "focusPolicy + MouseArea (buggy)"; description: "Rectangle with focusPolicy, MouseArea calls forceActiveFocus on press" }
+        ListElement { mode: 4; name: "Control + TapHandler (buggy)"; description: "Control from QtQuick.Controls with TapHandler" }
+        ListElement { mode: 6; name: "Control + Accessible.pressed (buggy)"; description: "Control with Accessible.pressed but no focusPolicy" }
+        // Working solutions
+        ListElement { mode: 5; name: "Rectangle + focusPolicy + Accessible.pressed (works)"; description: "Rectangle with focusPolicy and Accessible.pressed" }
+        ListElement { mode: 7; name: "Control + focusPolicy + Accessible.pressed (works)"; description: "Control with focusPolicy and Accessible.pressed" }
     }
 
     Timer {
@@ -77,7 +81,7 @@ Window {
                 spacing: 8
 
                 Text {
-                    text: "Select close button behavior:"
+                    text: "Select input panel close button behaviour:"
                     font.pixelSize: 14
                     font.bold: true
                     color: "#333"
@@ -89,14 +93,13 @@ Window {
                     height: contentHeight
                     model: closeModes
                     interactive: false
-                    currentIndex: window.closeMode
 
                     delegate: Rectangle {
                         width: modeList.width
                         height: 50
-                        color: index === modeList.currentIndex ? "#bbdefb" : "#fff"
-                        border.color: index === modeList.currentIndex ? "#2196F3" : "#ccc"
-                        border.width: index === modeList.currentIndex ? 2 : 1
+                        color: model.mode === window.closeMode ? "#bbdefb" : "#fff"
+                        border.color: model.mode === window.closeMode ? "#2196F3" : "#ccc"
+                        border.width: model.mode === window.closeMode ? 2 : 1
                         radius: 4
 
                         Column {
@@ -119,7 +122,7 @@ Window {
 
                         MouseArea {
                             anchors.fill: parent
-                            onClicked: window.closeMode = index
+                            onClicked: window.closeMode = model.mode
                         }
                     }
                 }
