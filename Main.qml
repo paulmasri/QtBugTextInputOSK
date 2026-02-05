@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Controls
 import QtQuick.Window
 
 Window {
@@ -57,29 +58,11 @@ Window {
                 horizontalAlignment: Text.AlignHCenter
             }
 
-            // Show button using MouseArea
-            Rectangle {
-                width: 160
-                height: 40
+            Button {
+                text: "Show Input Panel"
                 anchors.horizontalCenter: parent.horizontalCenter
                 visible: !modalLayer.visible
-                color: showMouseArea.containsMouse ? "#ccc" : "#ddd"
-                border.color: "#999"
-                radius: 4
-
-                Text {
-                    anchors.centerIn: parent
-                    text: "Show Input Panel"
-                    font.pixelSize: 14
-                }
-
-                MouseArea {
-                    id: showMouseArea
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    cursorShape: Qt.PointingHandCursor
-                    onClicked: modalLayer.showLayer()
-                }
+                onClicked: modalLayer.showLayer()
             }
         }
     }
