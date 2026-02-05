@@ -113,6 +113,36 @@ FocusScope {
                 }
             }
 
+            // Close button - focusPolicy + MouseArea variant (mode 3)
+            Rectangle {
+                id: closeButton3
+                width: 80
+                height: 32
+                anchors.right: parent.right
+                anchors.verticalCenter: parent.verticalCenter
+                visible: root.closeMode === 3
+                color: closeMouseArea3.containsMouse ? "#ccc" : "#ddd"
+                border.color: "#999"
+                border.width: 1
+                radius: 4
+                focusPolicy: Qt.StrongFocus
+
+                Text {
+                    anchors.centerIn: parent
+                    text: "Close"
+                    font.pixelSize: 14
+                }
+
+                MouseArea {
+                    id: closeMouseArea3
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
+                    onPressed: closeButton3.forceActiveFocus()
+                    onClicked: root.closeTriggered()
+                }
+            }
+
         }
 
         // 1. Plain TextInput

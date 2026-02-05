@@ -17,6 +17,7 @@ Window {
         ListElement { name: "MouseArea (has bug)"; description: "Close using MouseArea - OSK becomes sticky" }
         ListElement { name: "Button (works)"; description: "Close using Button component - OSK behaves correctly" }
         ListElement { name: "focusPolicy + TapHandler"; description: "Item with focusPolicy: Qt.StrongFocus (Qt 6.7+)" }
+        ListElement { name: "focusPolicy + MouseArea"; description: "focusPolicy with MouseArea.onPressed forceActiveFocus" }
     }
 
     Timer {
