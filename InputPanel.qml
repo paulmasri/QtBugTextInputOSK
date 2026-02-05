@@ -84,35 +84,6 @@ FocusScope {
                 onClicked: root.closeTriggered()
             }
 
-            // Close button - MouseArea + focus variant (mode 2)
-            Rectangle {
-                width: 80
-                height: 32
-                anchors.right: parent.right
-                anchors.verticalCenter: parent.verticalCenter
-                visible: root.closeMode === 2
-                color: closeMouseArea2.containsMouse ? "#ccc" : "#ddd"
-                border.color: "#999"
-                border.width: 1
-                radius: 4
-
-                Text {
-                    anchors.centerIn: parent
-                    text: "Close"
-                    font.pixelSize: 14
-                }
-
-                MouseArea {
-                    id: closeMouseArea2
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    cursorShape: Qt.PointingHandCursor
-                    onClicked: {
-                        focusDummy.forceActiveFocus()
-                        root.closeTriggered()
-                    }
-                }
-            }
         }
 
         // 1. Plain TextInput
@@ -135,6 +106,30 @@ FocusScope {
             id: input3
             width: parent.width
             placeholderText: "3. TextField (QuickControls)"
+        }
+
+        // Clear focus button
+        Rectangle {
+            width: 120
+            height: 32
+            color: clearFocusMouseArea.containsMouse ? "#ccc" : "#ddd"
+            border.color: "#999"
+            border.width: 1
+            radius: 4
+
+            Text {
+                anchors.centerIn: parent
+                text: "Clear Focus"
+                font.pixelSize: 14
+            }
+
+            MouseArea {
+                id: clearFocusMouseArea
+                anchors.fill: parent
+                hoverEnabled: true
+                cursorShape: Qt.PointingHandCursor
+                onClicked: focusDummy.forceActiveFocus()
+            }
         }
 
         // Diagnostic info

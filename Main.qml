@@ -16,7 +16,6 @@ Window {
         id: closeModes
         ListElement { name: "MouseArea (has bug)"; description: "Close using MouseArea - OSK becomes sticky" }
         ListElement { name: "Button (works)"; description: "Close using Button component - OSK behaves correctly" }
-        ListElement { name: "MouseArea + focus"; description: "Close using MouseArea with forceActiveFocus workaround" }
     }
 
     Timer {
